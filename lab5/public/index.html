@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recipe Recommender</title>
+    <meta
+      name="description"
+      content="This app suggests recipes based on ingredients and dietary needs using the Spoonacular API."
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Powered by Spoonacular API!</p>
+        <h1>Recipe Recommender</h1>
+        <p class="hero__text">
+          Enter ingredients, choose dietary filters, and get recipe ideas and instructions.
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="layout">
+      <section class="panel panel--form" aria-labelledby="search-heading">
+        <h2 id="search-heading">Find recipes</h2>
+        <p class="instructions">
+          Add ingredients separated by commas. Example: <strong>tomato, spinach, rice</strong>.
+        </p>
+
+        <form id="recipe-form" novalidate>
+          <div class="field-group">
+            <label for="ingredients">Available ingredients</label>
+            <input
+              id="ingredients"
+              name="ingredients"
+              type="text"
+              autocomplete="off"
+              placeholder="e.g. chickpeas, lemon, garlic"
+              aria-describedby="ingredients-help ingredient-suggestions"
+            />
+            <small id="ingredients-help">Ingredient suggestions appear while you type.</small>
+            <ul id="ingredient-suggestions" class="suggestions" aria-live="polite"></ul>
+          </div>
+
+          <div class="field-group">
+            <label for="query">Recipe keyword</label>
+            <input id="query" name="query" type="text" placeholder="e.g. curry, soup, pasta" />
+          </div>
+
+          <div class="grid-two">
+            <div class="field-group">
+              <label for="diet">Diet</label>
+              <select id="diet" name="diet">
+                <option value="">No diet filter</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="ketogenic">Ketogenic</option>
+                <option value="paleo">Paleo</option>
+                <option value="pescetarian">Pescetarian</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="type">Meal type</label>
+              <select id="type" name="type">
+                <option value="">Any type</option>
+                <option value="main course">Main course</option>
+                <option value="side dish">Side dish</option>
+                <option value="breakfast">Breakfast</option>
+                <option value="salad">Salad</option>
+                <option value="dessert">Dessert</option>
+                <option value="soup">Soup</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="intolerances">Intolerances</label>
+            <select id="intolerances" name="intolerances">
+              <option value="">No intolerance filter</option>
+              <option value="gluten">Gluten free</option>
+              <option value="dairy">Dairy free</option>
+              <option value="egg">Egg free</option>
+              <option value="peanut">Peanut free</option>
+              <option value="seafood">Seafood free</option>
+              <option value="sesame">Sesame free</option>
+              <option value="soy">Soy free</option>
+            </select>
+          </div>
+
+          <div class="button-row">
+            <button type="submit" class="button button--primary">Recommend recipes</button>
+            <button type="button" id="random-btn" class="button button--secondary">Surprise me</button>
+            <button type="reset" class="button button--ghost">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel panel--results" aria-labelledby="results-heading">
+        <div class="results-header">
+          <h2 id="results-heading">Results</h2>
+          <p id="result-count" class="result-count">No search yet.</p>
+        </div>
+
+        <div id="status-message" class="status-message" aria-live="polite">
+          Start by entering ingredients or a recipe keyword.
+        </div>
+
+        <div id="results" class="card-grid" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <dialog id="recipe-modal" class="modal" aria-labelledby="modal-title">
+      <div class="modal__header">
+        <h2 id="modal-title">Recipe details</h2>
+        <button id="close-modal" class="icon-button" aria-label="Close recipe details">×</button>
+      </div>
+      <div id="modal-content" class="modal__content"></div>
+    </dialog>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
